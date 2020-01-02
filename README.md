@@ -15,4 +15,4 @@ Descrição:
 Aplicativo que auxilia no treino fitness. Usuário tem a opção de escolher os dias de treino, a quantidade de exercicios ou criar seus próprios exercicios. Realizar combinações de treinos especificos.
 
 Fluxo:
-Em cada página, iniciando pelo App.js, tem um comentário do passo seguinte a ser feito
+Em cada página, iniciando pelo App.js, tem um comentário do passo seguinte a ser feito.
