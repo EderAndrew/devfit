@@ -2,8 +2,11 @@ import React, { useEffect } from 'react'
 import { Text } from 'react-native'
 import styled from 'styled-components/native'
 import { connect } from 'react-redux'
+import Workout from '../components/Workout'
 //Importando o json
 import workoutJson from '../presetWorkouts.json'
+
+
 
 const Container = styled.SafeAreaView`
     flex:1;
@@ -39,7 +42,7 @@ const Page = (props) => {
             <Texto>Você selecionou {props.myWorkouts.length} treinos</Texto>
             <WorkoutList 
                 data={workoutJson}
-                renderItem={({item})=><Text>{item.name}</Text>}
+                renderItem={({item})=><Workout data={item}/>}
                 KeyExtractor={item=>item.id}
             />
         </Container>
