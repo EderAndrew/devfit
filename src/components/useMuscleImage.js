@@ -14,6 +14,19 @@ export default (muscle) => {
         case 'chest':
             muscleImage = require('../assets/muscles/chest.png')
             break
+        case 'gluteos':
+            muscleImage = require('../assets/muscles/gluteos.png')
+            break
+        case 'legs':
+            muscleImage = require('../assets/muscles/legs.png')
+            break
+        case 'shoulders':
+            muscleImage = require('../assets/muscles/shoulders.png')
+            break
+        case 'triceps':
+            muscleImage = require('../assets/muscles/triceps.png')
+            break
+        
     }
     return muscleImage
 }

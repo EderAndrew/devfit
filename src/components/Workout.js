@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components/native'
 
+import useMuscleImage from '../components/useMuscleImage'
+
 const Workout = styled.View`
     background-color:#F1F1F1;
     flex-direction:row;
@@ -33,7 +35,7 @@ const MuscleImage = styled.Image`
 `
 
 const WorkoutActions = styled.View`
-
+    justify-content:center;
 `
 const WorkoutButton = styled.TouchableHighlight`
     width:25px;
@@ -59,11 +61,11 @@ export default (props) => {
             <WorkoutInfo>
                 <WorkoutTitle>{props.data.name}</WorkoutTitle>
                 <MuscleScroll horizontal={true}>
-                    {muscleGroups.map((m, index)=>{
+                    {muscleGroups.map((m, index)=>(
                         <MuscleGroup key={index}>
                             <MuscleImage source={useMuscleImage(m)} />
                         </MuscleGroup>
-                    })}
+                    ))}
                 </MuscleScroll>
             </WorkoutInfo>
             <WorkoutActions>
