@@ -68,7 +68,7 @@ const Page = props => {
           width={110}
           style={{marginBottom: 20}}
           underlayColor="#CCC">
-          <Text>Domingo</Text>
+          <Text>Segunda</Text>
         </DefaultButton>
         <DefaultButton
           bgcolor={props.workoutDays.includes(1) ? '#A5E8BC' : false}
@@ -76,7 +76,7 @@ const Page = props => {
           width={110}
           style={{marginBottom: 20}}
           underlayColor="#CCC">
-          <Text>Segunda</Text>
+          <Text>Terça</Text>
         </DefaultButton>
         <DefaultButton
           bgcolor={props.workoutDays.includes(2) ? '#A5E8BC' : false}
@@ -84,7 +84,7 @@ const Page = props => {
           width={110}
           style={{marginBottom: 20}}
           underlayColor="#CCC">
-          <Text>Terça</Text>
+          <Text>Quarta</Text>
         </DefaultButton>
         <DefaultButton
           bgcolor={props.workoutDays.includes(3) ? '#A5E8BC' : false}
@@ -92,7 +92,7 @@ const Page = props => {
           width={110}
           style={{marginBottom: 20}}
           underlayColor="#CCC">
-          <Text>Quarta</Text>
+          <Text>Quinta</Text>
         </DefaultButton>
         <DefaultButton
           bgcolor={props.workoutDays.includes(4) ? '#A5E8BC' : false}
@@ -100,7 +100,7 @@ const Page = props => {
           width={110}
           style={{marginBottom: 20}}
           underlayColor="#CCC">
-          <Text>Quinta</Text>
+          <Text>Sexya</Text>
         </DefaultButton>
         <DefaultButton
           bgcolor={props.workoutDays.includes(5) ? '#A5E8BC' : false}
@@ -108,7 +108,7 @@ const Page = props => {
           width={110}
           style={{marginBottom: 20}}
           underlayColor="#CCC">
-          <Text>Sexta</Text>
+          <Text>Sábado</Text>
         </DefaultButton>
         <DefaultButton
           bgcolor={props.workoutDays.includes(6) ? '#A5E8BC' : false}
@@ -116,7 +116,7 @@ const Page = props => {
           width={110}
           style={{marginBottom: 20}}
           underlayColor="#CCC">
-          <Text>Sábado</Text>
+          <Text>Domingo</Text>
         </DefaultButton>
       </DaysArea>
     </Container>

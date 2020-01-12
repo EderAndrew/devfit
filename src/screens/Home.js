@@ -93,8 +93,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addWorkout: Workout => dispatch({type: 'ADD_WORKOUT', payload: {Workout}}),
-    delWorkout: Workout => dispatch({type: 'DEL_WORKOUT', payload: {Workout}}),
+    
   };
 };
 
