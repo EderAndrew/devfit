@@ -1,93 +1,120 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-shadow */
 /* eslint-disable no-alert */
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components/native';
-import {StackActions, NavigationActions} from 'react-navigation';
 import {connect} from 'react-redux';
-import Workout from '../components/Workout';
-//Importando o json
-import workoutJson from '../presetWorkouts.json';
+
+import HomeMonthScroll from '../components/HomeMonthScroll';
+import HomeDayScroll from '../components/HomeDayScroll';
+import HomeDayStatus from '../components/HomeDayStatus';
 
 const Container = styled.SafeAreaView`
-  flex: 1;
   align-items: center;
-  margin-right: 30px;
-  margin-left: 30px;
-  margin-top: 50px;
 `;
-const Title = styled.Text`
-  font-size: 22px;
-  color: #333;
-  margin-bottom: 50px;
-  text-align: center;
+const Legend = styled.View`
+  width: 90%;
+  align-items: flex-start;
+  margin-top: 30px;
 `;
-const Texto = styled.Text`
-  font-size: 16px;
-  color: #333;
-  text-align: center;
-  margin-bottom: 50px;
+const LegendText = styled.Text`
+  color: #555;
 `;
-const NextButton = styled.Button``;
-const WorkoutList = styled.FlatList`
-  width: 100%;
+const LegendItem = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
 `;
-const Page = props => {
-  useEffect(() => {
-    props.navigation.setParams({myWorkouts: props.myWorkouts});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.myWorkouts]);
+const LegendBox = styled.View`
+  width: 15px;
+  height: 15px;
+  background-color: #ccc;
+  margin-right: 5px;
+`;
 
-  const addWorkout = item => {
-    if (props.myWorkouts.findIndex(i => i.id === item.id) < 0) {
-      props.addWorkout(item);
-    } else {
-      props.delWorkout(item);
-    }
-  };
+const Page = props => {
+  let today = new Date();
+
+  const [selectedMonth, setSelectedMonth] = useState(today.getMonth());
+  const [selectedDay, setSelectedDay] = useState(today.getDate());
+
   return (
     <Container>
-      <Title>Opções de treino pré-criados com base no seu nível</Title>
-      <Texto>Você selecionou {props.myWorkouts.length} treinos</Texto>
-      <WorkoutList
-        data={workoutJson}
-        renderItem={({item}) => (
-          <Workout data={item} addAction={() => addWorkout(item)} />
-        )}
-        KeyExtractor={item => item.id}
+      <HomeMonthScroll
+        selectedMonth={selectedMonth}
+        setSelectedMonth={setSelectedMonth}
       />
+      <HomeDayScroll 
+        selectedMonth={selectedMonth}
+        selectedDay={selectedDay}
+        setSelectedDay={setSelectedDay}
+        dailyProgress={props.dailyProgress}
+        workoutDays={props.workoutDays}
+      />
+      <HomeDayStatus />
+      <LegendText>Mês: {selectedMonth}</LegendText>
+      <Legend>
+        <LegendText>Legenda:</LegendText>
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#B5EEFF'}}></LegendBox>
+          <LegendText>Hoje</LegendText>
+        </LegendItem>
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#B5FFB8'}}></LegendBox>
+          <LegendText>Treino Feito</LegendText>
+        </LegendItem>
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#FFB5B5'}}></LegendBox>
+          <LegendText>Treino perdido</LegendText>
+        </LegendItem>
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#F4F4F4', opacity: 0.2}}></LegendBox>
+          <LegendText>Dia de descanso</LegendText>
+        </LegendItem>
+        <LegendItem>
+          <LegendBox style={{backgroundColor: '#F4F4F4'}}></LegendBox>
+          <LegendText>Dia futuro</LegendText>
+        </LegendItem>
+      </Legend>
     </Container>
   );
 };
 
 Page.navigationOptions = ({navigation}) => {
-  let btnNext = 'Ignorar';
-  if (
-    navigation.state.params &&
-    navigation.state.params.myWorkouts.length > 0
-  ) {
-    btnNext = 'Concluir';
-  }
-  const nextAction = () => {
-    navigation.dispatch(
-      StackActions.reset({
-        index: 0,
-        action: [NavigationActions.navigate({routeName: 'AppTab'})],
-      }),
+  const ConfigButtonArea = styled.TouchableHighlight`
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+  `;
+  const ConfigButtonImage = styled.Image`
+    width: 25px;
+    height: 25px;
+  `;
+
+  const ConfigButton = () => {
+    const btnAction = () => {
+      navigation.navigate('HomeConfig');
+    };
+    return (
+      <ConfigButtonArea onPress={btnAction}>
+        <ConfigButtonImage source={require('../assets/config.png')} />
+      </ConfigButtonArea>
     );
   };
-
   return {
-    title: '',
-    headerRight: <NextButton title={btnNext} onPress={nextAction} />,
+    title: 'Seu Progresso diário',
+    headerRight: <ConfigButton />,
     headerRightContainerStyle: {
-      marginRight: 20,
+      marginRight: 10,
     },
   };
 };
 
 const mapStateToProps = state => {
   return {
-    myWorkouts: state.userReducer.myWorkouts,
+    dailyProgress: state.userReducer.dailyProgress,
+    workoutDays: state.userReducer.workoutDays,
   };
 };
 
