@@ -28,9 +28,7 @@ let dayW = Math.round(screenWidth / 9);
 let offsetW = Math.round((screenWidth - dayW) / 2);
 
 const Day = props => {
-  return(
-    <DaysText>{props.day}</DaysText>
-  );
+  return <DaysText>{props.day}</DaysText>;
 };
 
 export default props => {
@@ -67,7 +65,11 @@ export default props => {
   }, [props.selectedDay]);
 
   let days = [];
-  let daysInMonth = new Date(new Date().getFullYear(), (props.selectedMonth+1), 0).getDate();
+  let daysInMonth = new Date(
+    new Date().getFullYear(),
+    props.selectedMonth + 1,
+    0,
+  ).getDate();
   for (let i = 1; i <= daysInMonth; i++) {
     days.push(i);
   }
